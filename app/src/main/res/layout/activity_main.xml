@@ -1,0 +1,69 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/outputText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:padding="12dp"
+        android:gravity="end"
+        android:text="0"
+        android:textSize="32sp"
+        android:background="@android:color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:rowCount="5"
+        android:columnCount="4"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/buttonClear"
+            android:text="C"
+            android:layout_margin="4dp" />
+        <Button
+            android:id="@+id/buttonPercent"
+            android:text="%"
+            android:layout_margin="4dp" />
+        <Button
+            android:id="@+id/buttonBackspace"
+            android:text="←"
+            android:layout_margin="4dp" />
+        <Button
+            android:id="@+id/buttonDivide"
+            android:text="/"
+            android:layout_margin="4dp" />
+
+        <Button android:id="@+id/button7" android:text="7" android:layout_margin="4dp" />
+        <Button android:id="@+id/button8" android:text="8" android:layout_margin="4dp" />
+        <Button android:id="@+id/button9" android:text="9" android:layout_margin="4dp" />
+        <Button android:id="@+id/buttonMultiply" android:text="*" android:layout_margin="4dp" />
+
+        <Button android:id="@+id/button4" android:text="4" android:layout_margin="4dp" />
+        <Button android:id="@+id/button5" android:text="5" android:layout_margin="4dp" />
+        <Button android:id="@+id/button6" android:text="6" android:layout_margin="4dp" />
+        <Button android:id="@+id/buttonMinus" android:text="-" android:layout_margin="4dp" />
+
+        <Button android:id="@+id/button1" android:text="1" android:layout_margin="4dp" />
+        <Button android:id="@+id/button2" android:text="2" android:layout_margin="4dp" />
+        <Button android:id="@+id/button3" android:text="3" android:layout_margin="4dp" />
+        <Button android:id="@+id/buttonPlus" android:text="+" android:layout_margin="4dp" />
+
+        <Button android:id="@+id/button0" android:text="0" android:layout_margin="4dp" />
+        <Button android:id="@+id/buttonDecimal" android:text="." android:layout_margin="4dp" />
+        <Button android:id="@+id/buttonEquals" android:text="=" android:layout_margin="4dp" />
+    </GridLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

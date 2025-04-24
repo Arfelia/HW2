@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Calculator</string>
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+    <string name="button_one">1</string>
+    <string name="aboutString1">Тут стоит написать что-нибудь интересное, например вы знали что если опустить горячее вареное яйцо в ледяную воду, то оно будет легче чиститься. Я вот об этом узнал во вчера лет.</string>
+</resources>
