@@ -13,7 +13,9 @@
         android:gravity="end"
         android:text="0"
         android:textSize="32sp"
-        android:background="@android:color/white"
+        android:fontFamily="@font/custom_font"
+        android:background="@color/white"
+        android:contentDescription="Результат вычисления"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -31,39 +33,47 @@
 
         <Button
             android:id="@+id/buttonClear"
-            android:text="C"
-            android:layout_margin="4dp" />
+            android:text="@string/clear"
+            android:layout_margin="4dp"
+            android:contentDescription="Очистить ввод"
+            style="@style/CalculatorButton"/>
         <Button
             android:id="@+id/buttonPercent"
-            android:text="%"
-            android:layout_margin="4dp" />
+            android:text="@string/percent"
+            android:layout_margin="4dp"
+            android:contentDescription="Процент"
+            style="@style/CalculatorButton"/>
         <Button
             android:id="@+id/buttonBackspace"
-            android:text="←"
-            android:layout_margin="4dp" />
+            android:text="@string/backspace"
+            android:layout_margin="4dp"
+            android:contentDescription="Удалить последний символ"
+            style="@style/CalculatorButton"/>
         <Button
             android:id="@+id/buttonDivide"
-            android:text="/"
-            android:layout_margin="4dp" />
+            android:text="@string/divide"
+            android:layout_margin="4dp"
+            android:contentDescription="Деление"
+            style="@style/CalculatorButton"/>
 
-        <Button android:id="@+id/button7" android:text="7" android:layout_margin="4dp" />
-        <Button android:id="@+id/button8" android:text="8" android:layout_margin="4dp" />
-        <Button android:id="@+id/button9" android:text="9" android:layout_margin="4dp" />
-        <Button android:id="@+id/buttonMultiply" android:text="*" android:layout_margin="4dp" />
+        <Button android:id="@+id/button7" android:text="@string/seven" android:layout_margin="4dp" android:contentDescription="Семь" style="@style/CalculatorButton"/>
+        <Button android:id="@+id/button8" android:text="@string/eight" android:layout_margin="4dp" android:contentDescription="Восемь" style="@style/CalculatorButton"/>
+        <Button android:id="@+id/button9" android:text="@string/nine" android:layout_margin="4dp" android:contentDescription="Девять" style="@style/CalculatorButton"/>
+        <Button android:id="@+id/buttonMultiply" android:text="@string/multiply" android:layout_margin="4dp" android:contentDescription="Умножение" style="@style/CalculatorButton"/>
 
-        <Button android:id="@+id/button4" android:text="4" android:layout_margin="4dp" />
-        <Button android:id="@+id/button5" android:text="5" android:layout_margin="4dp" />
-        <Button android:id="@+id/button6" android:text="6" android:layout_margin="4dp" />
-        <Button android:id="@+id/buttonMinus" android:text="-" android:layout_margin="4dp" />
+        <Button android:id="@+id/button4" android:text="@string/four" android:layout_margin="4dp" android:contentDescription="Четыре" style="@style/CalculatorButton"/>
+        <Button android:id="@+id/button5" android:text="@string/five" android:layout_margin="4dp" android:contentDescription="Пять" style="@style/CalculatorButton"/>
+        <Button android:id="@+id/button6" android:text="@string/six" android:layout_margin="4dp" android:contentDescription="Шесть" style="@style/CalculatorButton"/>
+        <Button android:id="@+id/buttonMinus" android:text="@string/minus" android:layout_margin="4dp" android:contentDescription="Вычитание" style="@style/CalculatorButton"/>
 
-        <Button android:id="@+id/button1" android:text="1" android:layout_margin="4dp" />
-        <Button android:id="@+id/button2" android:text="2" android:layout_margin="4dp" />
-        <Button android:id="@+id/button3" android:text="3" android:layout_margin="4dp" />
-        <Button android:id="@+id/buttonPlus" android:text="+" android:layout_margin="4dp" />
+        <Button android:id="@+id/button1" android:text="@string/one" android:layout_margin="4dp" android:contentDescription="Один" style="@style/CalculatorButton"/>
+        <Button android:id="@+id/button2" android:text="@string/two" android:layout_margin="4dp" android:contentDescription="Два" style="@style/CalculatorButton"/>
+        <Button android:id="@+id/button3" android:text="@string/three" android:layout_margin="4dp" android:contentDescription="Три" style="@style/CalculatorButton"/>
+        <Button android:id="@+id/buttonPlus" android:text="@string/plus" android:layout_margin="4dp" android:contentDescription="Сложение" style="@style/CalculatorButton"/>
 
-        <Button android:id="@+id/button0" android:text="0" android:layout_margin="4dp" />
-        <Button android:id="@+id/buttonDecimal" android:text="." android:layout_margin="4dp" />
-        <Button android:id="@+id/buttonEquals" android:text="=" android:layout_margin="4dp" />
+        <Button android:id="@+id/button0" android:text="@string/zero" android:layout_margin="4dp" android:contentDescription="Ноль" style="@style/CalculatorButton"/>
+        <Button android:id="@+id/buttonDecimal" android:text="@string/decimal" android:layout_margin="4dp" android:contentDescription="Десятичная точка" style="@style/CalculatorButton"/>
+        <Button android:id="@+id/buttonEquals" android:text="@string/equals" android:layout_margin="4dp" android:contentDescription="Равно" style="@style/CalculatorButton"/>
     </GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

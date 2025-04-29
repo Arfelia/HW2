@@ -2,6 +2,7 @@ package com.example.hw2;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                     if (secondOperand != 0) {
                         result /= secondOperand;
                     } else {
-                        outputText.setText("Ошибка");
+                        outputText.setText("Ошибка: деление на 0");
                         return;
                     }
                     break;
