@@ -1,136 +1,299 @@
 package com.example.hw2;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
 
-import android.widget.TextView;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.example.hw2.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView outputText;
-    private String currentInput = "";
-    private double result = 0;
-    private String currentOperation = "";
+
+    String lastOperation = "=";
+    String insertedNumbers = "";
+    private final String KEY_PARAMETERS = "key";
+    public Parameters parameters;
+    Double interim = null;
+
+    private ActivityMainBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        EdgeToEdge.enable(this);
 
-        outputText = findViewById(R.id.outputText);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
-        if (savedInstanceState != null) {
-            currentInput = savedInstanceState.getString("currentInput", "");
-            result = savedInstanceState.getDouble("result", 0);
-            currentOperation = savedInstanceState.getString("currentOperation", "");
-            outputText.setText(currentInput.isEmpty() ? "0" : currentInput);
-        }
+        initDrawer(binding.toolbar);
 
-        findViewById(R.id.button0).setOnClickListener(v -> appendDigit("0"));
-        findViewById(R.id.button1).setOnClickListener(v -> appendDigit("1"));
-        findViewById(R.id.button2).setOnClickListener(v -> appendDigit("2"));
-        findViewById(R.id.button3).setOnClickListener(v -> appendDigit("3"));
-        findViewById(R.id.button4).setOnClickListener(v -> appendDigit("4"));
-        findViewById(R.id.button5).setOnClickListener(v -> appendDigit("5"));
-        findViewById(R.id.button6).setOnClickListener(v -> appendDigit("6"));
-        findViewById(R.id.button7).setOnClickListener(v -> appendDigit("7"));
-        findViewById(R.id.button8).setOnClickListener(v -> appendDigit("8"));
-        findViewById(R.id.button9).setOnClickListener(v -> appendDigit("9"));
+        parameters = new Parameters();
 
-        findViewById(R.id.buttonPlus).setOnClickListener(v -> setOperation("+"));
-        findViewById(R.id.buttonMinus).setOnClickListener(v -> setOperation("-"));
-        findViewById(R.id.buttonMultiply).setOnClickListener(v -> setOperation("*"));
-        findViewById(R.id.buttonDivide).setOnClickListener(v -> setOperation("/"));
-        findViewById(R.id.buttonPercent).setOnClickListener(v -> setOperation("%"));
 
-        findViewById(R.id.buttonEquals).setOnClickListener(v -> calculateResult());
+        // Получить результат нажатия
 
-        findViewById(R.id.buttonClear).setOnClickListener(v -> clearInput());
-
-        findViewById(R.id.buttonBackspace).setOnClickListener(v -> backspace());
-
-        findViewById(R.id.buttonDecimal).setOnClickListener(v -> appendDecimal());
-    }
-
-    private void appendDigit(String digit) {
-        currentInput += digit;
-        outputText.setText(currentInput);
-    }
-
-    private void appendDecimal() {
-        if (!currentInput.contains(".")) {
-            currentInput += ".";
-            outputText.setText(currentInput);
-        }
-    }
-
-    private void backspace() {
-        if (!currentInput.isEmpty()) {
-            currentInput = currentInput.substring(0, currentInput.length() - 1);
-            outputText.setText(currentInput.isEmpty() ? "0" : currentInput);
-        }
-    }
-
-    private void setOperation(String operation) {
-        if (!currentInput.isEmpty()) {
-            result = Double.parseDouble(currentInput);
-            currentOperation = operation;
-            currentInput = "";
-        }
-    }
-
-    private void calculateResult() {
-        if (!currentInput.isEmpty()) {
-            double secondOperand = Double.parseDouble(currentInput);
-            switch (currentOperation) {
-                case "+":
-                    result += secondOperand;
-                    break;
-                case "-":
-                    result -= secondOperand;
-                    break;
-                case "*":
-                    result *= secondOperand;
-                    break;
-                case "/":
-                    if (secondOperand != 0) {
-                        result /= secondOperand;
-                    } else {
-                        outputText.setText("Ошибка: деление на 0");
-                        return;
-                    }
-                    break;
-                case "%":
-                    result = result % secondOperand;
-                    break;
+        binding.button0.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onNumberClick("0");
             }
-            outputText.setText(String.valueOf(result));
-            currentInput = "";
-            currentOperation = "";
-        }
+        });
+
+        binding.button1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onNumberClick("1");
+            }
+        });
+
+        binding.button2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onNumberClick("2");
+            }
+        });
+
+        binding.button3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onNumberClick("3");
+            }
+        });
+
+        binding.button4.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onNumberClick("4");
+            }
+        });
+
+        binding.button5.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onNumberClick("5");
+            }
+        });
+
+        binding.button6.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onNumberClick("6");
+            }
+        });
+
+        binding.button7.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onNumberClick("7");
+            }
+        });
+
+        binding.button8.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onNumberClick("8");
+            }
+        });
+
+        binding.button9.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onNumberClick("9");
+            }
+        });
+
+        binding.button0.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onNumberClick("0");
+            }
+        });
+
+        binding.buttonDecimal.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onNumberClick(".");
+            }
+        });
+
+        binding.buttonPlus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onOperationClick("+");
+            }
+        });
+
+        binding.buttonMinus.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onOperationClick("-");
+            }
+        });
+
+        binding.buttonMultiply.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onOperationClick("*");
+            }
+        });
+
+        binding.buttonDivide.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onOperationClick("/");
+            }
+        });
+
+        binding.buttonEquals.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onOperationClick("=");
+            }
+        });
+        binding.buttonClear.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                clearInsertedNumbers();
+            }
+        });
+
+        binding.buttonBackspace.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showDialogFragment();
+                onOperationClick("clearLast");
+            }
+        });
+
+        binding.buttonPercent.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onOperationClick("percentage");
+                showDialogFragment();
+            }
+        });
     }
 
-    private void clearInput() {
-        currentInput = "";
-        result = 0;
-        currentOperation = "";
-        outputText.setText("0");
+
+
+    public void clearInsertedNumbers() {
+        insertedNumbers = "0";
+        interim = null;
+        binding.numberField.setText(insertedNumbers);
     }
 
+    // Сохранение данных
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("currentInput", currentInput);
-        outState.putDouble("result", result);
-        outState.putString("currentOperation", currentOperation);
+        outState.putString("savedNumber", insertedNumbers);
+        outState.putString("lastOperation", lastOperation);
+        outState.putDouble("interim", interim != null ? interim : 0.0);
     }
 
+    // Восстановление данных
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        currentInput = savedInstanceState.getString("currentInput", "");
-        result = savedInstanceState.getDouble("result", 0);
-        currentOperation = savedInstanceState.getString("currentOperation", "");
-        outputText.setText(currentInput.isEmpty() ? "0" : currentInput);
+        insertedNumbers = savedInstanceState.getString("savedNumber", "0");
+        lastOperation = savedInstanceState.getString("lastOperation", "=");
+        interim = savedInstanceState.getDouble("interim", 0.0);
+        binding.numberField.setText(insertedNumbers);
+
     }
+
+    // обработка нажатия на числовую кнопку
+    public void onNumberClick(String number) {
+        insertedNumbers = insertedNumbers + number;
+        parameters.insertedNumbers = insertedNumbers;
+        binding.numberField.setText(insertedNumbers);
+    }
+
+    // обработка нажатия на кнопку операции
+    public void onOperationClick(String operation) {
+
+        String number = insertedNumbers;
+
+        if (!number.isEmpty()) {
+            number = number.replace(',', '.');
+            try {
+                calculate(Double.valueOf(number), lastOperation);
+            } catch (NumberFormatException ex) {
+                binding.numberField.setText("");
+            }
+        }
+        lastOperation = operation;
+    }
+
+    private void calculate(Double number, String operation) {
+
+        if (interim == null)
+            interim = number;
+        else {
+            if (lastOperation.equals("=")) {
+                lastOperation = operation;
+            }
+            binding.numberField.setText(interim.toString());
+            switch (operation) {
+
+                case "=":
+                    interim = number;
+                    break;
+                case "/":
+                    if (number == 0) {
+                        interim = 0.0;
+                    } else {
+                        interim /= number;
+                    }
+                    break;
+                case "*":
+                    interim *= number;
+                    break;
+                case "+":
+                    interim += number;
+                    break;
+                case "-":
+                    interim -= number;
+                    break;
+
+                case "percentage":
+                    showDialogFragment();
+                    break;
+            }
+        }
+
+        binding.numberField.setText(interim.toString().replace('.', ','));
+        insertedNumbers = "";
+    }
+
+
+    //Меню
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Inflate the menu, this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+
+    private void initDrawer(Toolbar toolbar) {
+
+        // Находим DrawerLayout
+        final DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        // Создаем ActionBarDrawerToggle
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+    }
+
+    private void showDialogFragment() {
+        new MyDialogFragment().show(getSupportFragmentManager(), MyDialogFragment.TAG);
+    }
+
 }
+
+
+/*
+https://www.geeksforgeeks.org/data-binding-in-android-activities-views-and-fragments/*/

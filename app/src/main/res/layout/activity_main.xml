@@ -1,79 +1,252 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:openDrawer="start">
 
-    <TextView
-        android:id="@+id/outputText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:padding="12dp"
-        android:gravity="end"
-        android:text="0"
-        android:textSize="32sp"
-        android:fontFamily="@font/custom_font"
-        android:background="@color/white"
-        android:contentDescription="Результат вычисления"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <GridLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:rowCount="5"
-        android:columnCount="4"
-        android:padding="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
-        <Button
-            android:id="@+id/buttonClear"
-            android:text="@string/clear"
-            android:layout_margin="4dp"
-            android:contentDescription="Очистить ввод"
-            style="@style/CalculatorButton"/>
-        <Button
-            android:id="@+id/buttonPercent"
-            android:text="@string/percent"
-            android:layout_margin="4dp"
-            android:contentDescription="Процент"
-            style="@style/CalculatorButton"/>
-        <Button
-            android:id="@+id/buttonBackspace"
-            android:text="@string/backspace"
-            android:layout_margin="4dp"
-            android:contentDescription="Удалить последний символ"
-            style="@style/CalculatorButton"/>
-        <Button
-            android:id="@+id/buttonDivide"
-            android:text="@string/divide"
-            android:layout_margin="4dp"
-            android:contentDescription="Деление"
-            style="@style/CalculatorButton"/>
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <Button android:id="@+id/button7" android:text="@string/seven" android:layout_margin="4dp" android:contentDescription="Семь" style="@style/CalculatorButton"/>
-        <Button android:id="@+id/button8" android:text="@string/eight" android:layout_margin="4dp" android:contentDescription="Восемь" style="@style/CalculatorButton"/>
-        <Button android:id="@+id/button9" android:text="@string/nine" android:layout_margin="4dp" android:contentDescription="Девять" style="@style/CalculatorButton"/>
-        <Button android:id="@+id/buttonMultiply" android:text="@string/multiply" android:layout_margin="4dp" android:contentDescription="Умножение" style="@style/CalculatorButton"/>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="@string/app_name"
+                app:titleTextAppearance="@style/ToolbarTitleStyle"
+                android:background="@color/mainButtonColor"/>
 
-        <Button android:id="@+id/button4" android:text="@string/four" android:layout_margin="4dp" android:contentDescription="Четыре" style="@style/CalculatorButton"/>
-        <Button android:id="@+id/button5" android:text="@string/five" android:layout_margin="4dp" android:contentDescription="Пять" style="@style/CalculatorButton"/>
-        <Button android:id="@+id/button6" android:text="@string/six" android:layout_margin="4dp" android:contentDescription="Шесть" style="@style/CalculatorButton"/>
-        <Button android:id="@+id/buttonMinus" android:text="@string/minus" android:layout_margin="4dp" android:contentDescription="Вычитание" style="@style/CalculatorButton"/>
+        </com.google.android.material.appbar.AppBarLayout>
 
-        <Button android:id="@+id/button1" android:text="@string/one" android:layout_margin="4dp" android:contentDescription="Один" style="@style/CalculatorButton"/>
-        <Button android:id="@+id/button2" android:text="@string/two" android:layout_margin="4dp" android:contentDescription="Два" style="@style/CalculatorButton"/>
-        <Button android:id="@+id/button3" android:text="@string/three" android:layout_margin="4dp" android:contentDescription="Три" style="@style/CalculatorButton"/>
-        <Button android:id="@+id/buttonPlus" android:text="@string/plus" android:layout_margin="4dp" android:contentDescription="Сложение" style="@style/CalculatorButton"/>
 
-        <Button android:id="@+id/button0" android:text="@string/zero" android:layout_margin="4dp" android:contentDescription="Ноль" style="@style/CalculatorButton"/>
-        <Button android:id="@+id/buttonDecimal" android:text="@string/decimal" android:layout_margin="4dp" android:contentDescription="Десятичная точка" style="@style/CalculatorButton"/>
-        <Button android:id="@+id/buttonEquals" android:text="@string/equals" android:layout_margin="4dp" android:contentDescription="Равно" style="@style/CalculatorButton"/>
-    </GridLayout>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:rowCount="5"
+            android:columnCount="4"
+            android:padding="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/numberField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:padding="12dp"
+                android:gravity="end"
+                android:text="0"
+                android:layout_span="5"
+                android:textSize="32sp"
+                android:fontFamily="@font/custom_font"
+                android:background="@color/white"
+                android:contentDescription="Результат вычисления"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/buttonClear"
+                android:text="@string/clear"
+                android:layout_margin="4dp"
+                android:contentDescription="Очистить ввод"
+                style="@style/CalculatorButton"/>
+
+            <Button
+                android:id="@+id/buttonPercent"
+                android:text="@string/percent"
+                android:layout_margin="4dp"
+                android:contentDescription="Процент"
+                style="@style/CalculatorButton"/>
+
+            <Button
+                android:id="@+id/buttonBackspace"
+                android:text="@string/backspace"
+                android:layout_margin="4dp"
+                android:contentDescription="Удалить последний символ"
+                style="@style/CalculatorButton"/>
+
+            <Button
+                android:id="@+id/buttonDivide"
+                android:text="@string/divide"
+                android:layout_margin="4dp"
+                android:contentDescription="Деление"
+                style="@style/CalculatorButton"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/button7"
+                android:layout_margin="4dp"
+                android:text="@string/seven"
+                android:contentDescription="Семь"
+                style="@style/CalculatorButton"/>
+
+            <Button
+                android:id="@+id/button8"
+                android:text="@string/eight"
+                android:layout_margin="4dp"
+                android:contentDescription="Восемь"
+                style="@style/CalculatorButton"/>
+
+            <Button
+                android:id="@+id/button9"
+                android:text="@string/nine"
+                android:layout_margin="4dp"
+                android:contentDescription="Девять"
+                style="@style/CalculatorButton"/>
+
+            <Button
+                android:id="@+id/buttonMultiply"
+                android:text="@string/multiply"
+                android:layout_margin="4dp"
+                android:contentDescription="Умножение"
+                style="@style/CalculatorButton"/>
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button4"
+                android:text="@string/four"
+                android:layout_margin="4dp"
+                android:contentDescription="Четыре"
+                style="@style/CalculatorButton"/>
+
+            <Button
+                android:id="@+id/button5"
+                android:text="@string/five"
+                android:layout_margin="4dp"
+                android:contentDescription="Пять"
+                style="@style/CalculatorButton"/>
+
+            <Button
+                android:id="@+id/button6"
+                android:text="@string/six"
+                android:layout_margin="4dp"
+                android:contentDescription="Шесть"
+                style="@style/CalculatorButton"/>
+
+            <Button
+                android:id="@+id/buttonMinus"
+                android:text="@string/minus"
+                android:layout_margin="4dp"
+                android:contentDescription="Вычитание"
+                style="@style/CalculatorButton"/>
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button1"
+                android:text="@string/one"
+                android:layout_margin="4dp"
+                android:contentDescription="Один"
+                style="@style/CalculatorButton"/>
+
+            <Button
+                android:id="@+id/button2"
+                android:text="@string/two"
+                android:layout_margin="4dp"
+                android:contentDescription="Два"
+                style="@style/CalculatorButton"/>
+
+            <Button
+                android:id="@+id/button3"
+                android:text="@string/three"
+                android:layout_margin="4dp"
+                android:contentDescription="Три"
+                style="@style/CalculatorButton"/>
+
+            <Button
+                android:id="@+id/buttonPlus"
+                android:text="@string/plus"
+                android:layout_margin="4dp"
+                android:contentDescription="Сложение"
+                style="@style/CalculatorButton"/>
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="left">
+
+            <Button
+                android:id="@+id/button0"
+                style="@style/CalculatorButton"
+                android:layout_margin="4dp"
+                android:contentDescription="Ноль"
+                android:text="@string/zero" />
+
+            <Button
+                android:id="@+id/buttonDecimal"
+                android:text="@string/decimal"
+                android:layout_margin="4dp"
+                android:contentDescription="Десятичная точка"
+                style="@style/CalculatorButton"/>
+
+            <Button
+                android:id="@+id/buttonEquals"
+                android:text="@string/equals"
+                android:layout_margin="4dp"
+                android:contentDescription="Равно"
+                style="@style/CalculatorButton"/>
+        </TableRow>
+    </TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+<com.google.android.material.navigation.NavigationView
+android:id="@+id/navigation_view"
+android:layout_width="wrap_content"
+android:layout_height="match_parent"
+android:layout_gravity="start"
+app:menu="@menu/menu" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>

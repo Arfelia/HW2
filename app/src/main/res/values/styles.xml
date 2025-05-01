@@ -6,4 +6,11 @@
         <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">@font/custom_font</item>
     </style>
+
+    <style name="ToolbarTitleStyle">
+        <item name="android:fontFamily">@font/custom_font</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
 </resources>
